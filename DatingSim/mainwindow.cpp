@@ -10,6 +10,7 @@
 #include <QInputDialog>
 #include <QString>
 #include "player.h"
+#include "avatarwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -86,6 +87,9 @@ void MainWindow::on_btnNew_clicked(){
             return;
         }
         Player* player = new Player(nombre);
+        AvatarWindow* avWin = new AvatarWindow(this,player);
+        avWin->setVisible(true);
+        this->setVisible(false);
     }
 
 }

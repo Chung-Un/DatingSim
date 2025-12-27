@@ -6,7 +6,7 @@
 class Player
 {
 public:
-    enum class Ruta {NERD, FASHION, MUSIC, FILO, CHEM,NINGUNO};
+    enum class Ruta {NERD, FASHION, MUSIC, FILO, CHEM, NINGUNO};
     Player(QString nombre);
 
     void setPfp(QPixmap pixmap);

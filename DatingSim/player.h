@@ -1,14 +1,15 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <QPixmap>
+#include <QString>
 
 class Player
 {
 public:
-    enum class Ruta {NERD, FASHION, MUSIC, FILO, CHEM};
-    Player();
+    enum class Ruta {NERD, FASHION, MUSIC, FILO, CHEM,NINGUNO};
+    Player(QString nombre);
 
-    int setPfp(QPixmap pixmap);
+    void setPfp(QPixmap pixmap);
     QPixmap getPfp() const  {return pfp;}
 
     int getCorazonesPrimeraFase ();
@@ -22,12 +23,20 @@ public:
     Ruta seleccionarRuta();
     Ruta getRutaActual()const {return ruta;}
 
+    QString getNombre() const { return nombre; }
+    void setNombre(QString nombre);
+
+    Ruta getRutabyIndex(int index);
+    int getIndicebyRuta(Ruta ruta);
+
 private:
     QPixmap pfp;
     Ruta ruta;
     int corazonesPrimeraFase[5]={0,0,0,0,0};
     int corazonesRuta=0;
     int corazonesTotales[5]={0,0,0,0,0};
+    int index=-1;
+    QString nombre;
 };
 
 #endif // PLAYER_H

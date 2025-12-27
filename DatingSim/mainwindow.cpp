@@ -7,6 +7,9 @@
 #include <QColor>
 #include <QMessageBox>
 #include <QDebug>
+#include <QInputDialog>
+#include <QString>
+#include "player.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -56,6 +59,34 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_btnNew_clicked(){
+    QInputDialog dialog;
+    dialog.setWindowTitle("Ahora...");
+    dialog.setFont(QFont("Minecraft"));
+    dialog.setLabelText("Ingresa tu nombre: ");
+    dialog.setStyleSheet("background-color: rgb(255,62,165);");
+    dialog.setOkButtonText("Listo!");
+    dialog.setCancelButtonText("Espera!");
+
+
+    if(dialog.exec()==QDialog::Accepted){
+        QString nombre = dialog.textValue();
+        qDebug() <<nombre;
+
+
+        if(nombre.isEmpty() || nombre.contains(' ')){
+            QMessageBox msgBox(this);
+            msgBox.setWindowTitle("Ups");
+            msgBox.setFont(QFont("Minecraft"));
+            msgBox.setText("No se permiten espacios en el nombre. Intenta de nuevo");
+            msgBox.setStyleSheet("background-color: rgb(255, 62, 165);");
+            msgBox.setStandardButtons(QMessageBox::Ok);
+            msgBox.button(QMessageBox::Ok)->setFont(QFont("Minecraft"));
+            msgBox.button(QMessageBox::Ok)->setText("Ok :(");
+            msgBox.exec();
+            return;
+        }
+        Player* player = new Player(nombre);
+    }
 
 }
 

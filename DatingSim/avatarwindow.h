@@ -20,9 +20,11 @@ public:
     ~AvatarWindow();
     Player* player;
     QVector<QPixmap> pfps;
+    QVector<QPushButton*> pfpBtns;
 
 private:
     Ui::AvatarWindow *ui;
+    QPushButton* addBtn;
 
 };
 

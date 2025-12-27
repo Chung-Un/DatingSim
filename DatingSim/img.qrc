@@ -1,1 +1,12 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/res">
+    <file>Pfps/pfp1.jpg</file>
+    <file>Pfps/pfp2.jpg</file>
+    <file>Pfps/pfp3.jpg</file>
+    <file>Pfps/pfp4.jpg</file>
+    <file>Pfps/pfp5.jpg</file>
+    <file>Pfps/pfp6.jpg</file>
+    <file>Pfps/pfp7.jpg</file>
+    <file>Pfps/pfp8.jpg</file>
+    </qresource>
+</RCC>

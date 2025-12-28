@@ -6,6 +6,7 @@
 #include <Qvector>
 #include <QPixmap>
 #include <QPushButton>
+#include <QMessageBox>
 
 namespace Ui {
 class AvatarWindow;
@@ -22,9 +23,15 @@ public:
     QVector<QPixmap> pfps;
     QVector<QPushButton*> pfpBtns;
 
+private slots:
+    void on_btn_clicked();
+    void on_addBtn_clicked();
+
 private:
     Ui::AvatarWindow *ui;
     QPushButton* addBtn;
+    QPixmap currentPixmap;
+    QMessageBox* msgBox;
 
 };
 

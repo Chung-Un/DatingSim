@@ -4,9 +4,11 @@
 #include<QWidget>
 #include<QVBoxLayout>
 #include<QGridLayout>
+#include <QMessageBox>
 #include<QLabel>
 #include<QPushButton>
 #include <QSize>
+#include <QFileDialog>
 
 AvatarWindow::AvatarWindow(QWidget *parent,Player * player)
     : QMainWindow(parent)
@@ -34,13 +36,14 @@ AvatarWindow::AvatarWindow(QWidget *parent,Player * player)
             int index = row*3 + col + 1;
 
             QString pfpPath =  QString("://res/Pfps/pfp%1.jpg").arg(index);
-            QPixmap pfpPixmap(pfpPath);
+            currentPixmap = QPixmap(pfpPath);
 
-            if(!pfpPixmap.isNull()){
-                btn->setIcon(pfpPixmap.scaled(180,180,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+            if(!currentPixmap.isNull()){
+                btn->setIcon(currentPixmap.scaled(180,180,Qt::KeepAspectRatio,Qt::SmoothTransformation));
                 btn->setIconSize(QSize(180,180));
                 btn->setStyleSheet("padding: 0px");
-                pfps.push_back(pfpPixmap);
+                connect(btn,&QPushButton::clicked,this,&AvatarWindow::on_btn_clicked);
+                pfps.push_back(currentPixmap);
             }else{
                 continue;
             }
@@ -59,6 +62,8 @@ AvatarWindow::AvatarWindow(QWidget *parent,Player * player)
     grid->addWidget(addBtn,2,2);
     pfpBtns.push_back(addBtn);
 
+    connect(addBtn,&QPushButton::clicked,this,&AvatarWindow::on_addBtn_clicked);
+
     grid->setAlignment(Qt::AlignVCenter);
 
     widgetPfps->setLayout(grid);
@@ -67,13 +72,32 @@ AvatarWindow::AvatarWindow(QWidget *parent,Player * player)
     widgetCentral->setLayout(box);
     setCentralWidget(widgetCentral);
 
-
-    // connect(btnLoad,&QPushButton::clicked,this, &MainWindow::on_btnLoad_clicked);
-    // connect(btnNew,&QPushButton::clicked,this,&MainWindow::on_btnNew_clicked);
-    // //emisor,accion,receptor,reaccion
+    msgBox = new QMessageBox(this);
+    msgBox->setWindowTitle("Exito");
+    msgBox->setFont(QFont("Minecraft"));
+    msgBox->setText("Foto de perfil seleccionada!");
+    msgBox->setStyleSheet("background-color: rgb(255, 62, 165);");
+    msgBox->setStandardButtons(QMessageBox::Ok);
+    msgBox->button(QMessageBox::Ok)->setFont(QFont("Minecraft"));
+    msgBox->button(QMessageBox::Ok)->setText("Yay!");
 }
 
 AvatarWindow::~AvatarWindow()
 {
     delete ui;
+}
+
+void AvatarWindow::on_btn_clicked(){
+    player->setPfp(currentPixmap);
+    msgBox->exec();
+}
+
+void AvatarWindow::on_addBtn_clicked(){
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Elige tu foto de perfil: "),"C://","Imagenes (*.jpg *.jpeg *.png)");
+    QPixmap pfpSubida(fileName);
+
+    player->setPfp(pfpSubida);
+
+    msgBox->exec();
+
 }

@@ -1,12 +1,15 @@
 #include "player.h"
 using std::max_element;
 using std::distance;
+#include <QDebug>
 
 Player::Player(QString nombre) {}
 
 void Player::setPfp(QPixmap pixmap)
 {
     this->pfp = pixmap;
+    qDebug() <<"pfp seleccionada";
+
 }
 
 int Player::getCorazonesPrimeraFase()

@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         player.h player.cpp
         avatarwindow.h avatarwindow.cpp avatarwindow.ui
         Pfps/pfp1.jpg Pfps/pfp2.jpg Pfps/pfp3.jpg Pfps/pfp4.jpg Pfps/pfp5.jpg Pfps/pfp6.jpg Pfps/pfp7.jpg Pfps/pfp8.jpg
+        chatwindow.h chatwindow.cpp chatwindow.ui
 
 
 

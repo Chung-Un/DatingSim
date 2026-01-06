@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setFixedSize(800,600);
 
     QWidget * widget = new QWidget(this);
     QVBoxLayout* box = new QVBoxLayout(widget);

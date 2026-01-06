@@ -9,6 +9,7 @@
 #include<QPushButton>
 #include <QSize>
 #include <QFileDialog>
+#include "chatwindow.h"
 
 AvatarWindow::AvatarWindow(QWidget *parent,Player * player)
     : QMainWindow(parent)
@@ -16,6 +17,7 @@ AvatarWindow::AvatarWindow(QWidget *parent,Player * player)
 {
     ui->setupUi(this);
     this->player = player;
+    this->setFixedSize(800,600);
 
     QWidget* widgetCentral = new QWidget(this);
     QVBoxLayout* box = new QVBoxLayout(widgetCentral);
@@ -90,6 +92,12 @@ AvatarWindow::~AvatarWindow()
 void AvatarWindow::on_btn_clicked(){
     player->setPfp(currentPixmap);
     msgBox->exec();
+
+    if(QMessageBox::Ok){
+        ChatWindow * chatWin = new ChatWindow(this,this->player);
+        chatWin->setVisible(true);
+        this->setVisible(false);
+    }
 }
 
 void AvatarWindow::on_addBtn_clicked(){
@@ -98,6 +106,14 @@ void AvatarWindow::on_addBtn_clicked(){
 
     player->setPfp(pfpSubida);
 
-    msgBox->exec();
+    if(!fileName.isEmpty()){
+        msgBox->exec();
+        if(QMessageBox::Ok){
+            ChatWindow * chatWin = new ChatWindow(this,this->player);
+            chatWin->setVisible(true);
+            this->setVisible(false);
+        }
+
+    }
 
 }
